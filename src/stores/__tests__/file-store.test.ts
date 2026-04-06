@@ -153,17 +153,17 @@ describe('FileStore', () => {
     })
   })
 
-  describe('updatePageSvg', () => {
+  describe('updatePageData', () => {
     it('should update SVG content of a page', () => {
       const { pages } = useFileStore.getState()
       const svg = '<svg><rect/></svg>'
-      useFileStore.getState().updatePageSvg(pages[0].id, svg)
-      expect(useFileStore.getState().pages[0].svgContent).toBe(svg)
+      useFileStore.getState().updatePageData(pages[0].id, svg)
+      expect(useFileStore.getState().pages[0].canvasData).toBe(svg)
     })
 
     it('should mark file as modified', () => {
       const { pages } = useFileStore.getState()
-      useFileStore.getState().updatePageSvg(pages[0].id, '<svg/>')
+      useFileStore.getState().updatePageData(pages[0].id, '<svg/>')
       expect(useFileStore.getState().isModified).toBe(true)
     })
   })

@@ -1,5 +1,5 @@
 /* ============================================
-   SVG Editor — Design System
+   ThinkRender — Design System
    Dark theme targeting developers/tech users
    ============================================ */
 
@@ -263,6 +263,132 @@ body {
 
 .tool-btn:hover .tooltip {
   opacity: 1;
+}
+
+/* ── Asset Panel ── */
+.asset-panel {
+  width: var(--panel-width);
+  border-right: 1px solid var(--border-subtle);
+  border-left: none; /* Align to left side next to toolbar */
+}
+
+.asset-search-container {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: var(--space-2);
+  color: var(--text-muted);
+}
+
+.search-input-wrapper .prop-input {
+  padding-left: var(--space-8);
+}
+
+.asset-categories-tabs {
+  display: flex;
+  padding: 0 var(--space-2);
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-overlay);
+}
+
+.asset-category-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border-bottom: 2px solid transparent;
+}
+
+.asset-category-tab:hover {
+  color: var(--text-secondary);
+  background: var(--bg-hover);
+}
+
+.asset-category-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.asset-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-2);
+  padding: var(--space-3);
+}
+
+.asset-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-3);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.asset-item:hover {
+  border-color: var(--accent);
+  background: var(--bg-overlay);
+  transform: translateY(-1px);
+}
+
+.asset-preview {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2);
+}
+
+.asset-name {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.preview-rect {
+  width: 20px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-radius: 2px;
+}
+
+.preview-circle {
+  width: 18px;
+  height: 18px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+}
+
+.preview-triangle {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 18px solid currentColor;
 }
 
 /* ── Properties Panel ── */

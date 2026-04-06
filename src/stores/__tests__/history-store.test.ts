@@ -34,7 +34,7 @@ describe('HistoryStore', () => {
       useHistoryStore.getState().pushState('Draw rect', '<svg><rect/></svg>')
       const entry = useHistoryStore.getState().undoStack[0]
       expect(entry.label).toBe('Draw rect')
-      expect(entry.svgSnapshot).toBe('<svg><rect/></svg>')
+      expect(entry.canvasSnapshot).toBe('<svg><rect/></svg>')
     })
 
     it('should add timestamp', () => {
@@ -86,7 +86,7 @@ describe('HistoryStore', () => {
       useHistoryStore.getState().pushState('s1', '<svg>1</svg>')
       useHistoryStore.getState().pushState('s2', '<svg>2</svg>')
       const result = useHistoryStore.getState().undo()
-      expect(result?.svgSnapshot).toBe('<svg>1</svg>')
+      expect(result?.canvasSnapshot).toBe('<svg>1</svg>')
     })
 
     it('should move current state to redo stack', () => {
@@ -94,7 +94,7 @@ describe('HistoryStore', () => {
       useHistoryStore.getState().pushState('s2', '<svg>2</svg>')
       useHistoryStore.getState().undo()
       expect(useHistoryStore.getState().redoStack).toHaveLength(1)
-      expect(useHistoryStore.getState().redoStack[0].svgSnapshot).toBe('<svg>2</svg>')
+      expect(useHistoryStore.getState().redoStack[0].canvasSnapshot).toBe('<svg>2</svg>')
     })
 
     it('should shrink undo stack', () => {
@@ -111,7 +111,7 @@ describe('HistoryStore', () => {
       useHistoryStore.getState().pushState('s3', '<svg>3</svg>')
       useHistoryStore.getState().undo()
       const result = useHistoryStore.getState().undo()
-      expect(result?.svgSnapshot).toBe('<svg>1</svg>')
+      expect(result?.canvasSnapshot).toBe('<svg>1</svg>')
     })
   })
 
@@ -126,7 +126,7 @@ describe('HistoryStore', () => {
       useHistoryStore.getState().pushState('s2', '<svg>2</svg>')
       useHistoryStore.getState().undo()
       const result = useHistoryStore.getState().redo()
-      expect(result?.svgSnapshot).toBe('<svg>2</svg>')
+      expect(result?.canvasSnapshot).toBe('<svg>2</svg>')
     })
 
     it('should move entry back to undo stack', () => {

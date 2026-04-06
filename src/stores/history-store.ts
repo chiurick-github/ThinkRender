@@ -2,7 +2,7 @@ import { create } from 'zustand'
 
 interface HistoryEntry {
   label: string
-  svgSnapshot: string
+  canvasSnapshot: string
   timestamp: number
 }
 
@@ -11,7 +11,7 @@ interface HistoryState {
   redoStack: HistoryEntry[]
   maxSteps: number
 
-  pushState: (label: string, svg: string) => void
+  pushState: (label: string, data: string) => void
   undo: () => HistoryEntry | null
   redo: () => HistoryEntry | null
   canUndo: () => boolean
@@ -24,9 +24,9 @@ export const useHistoryStore = create<HistoryState>((set, get) => ({
   redoStack: [],
   maxSteps: 50,
 
-  pushState: (label, svg) =>
+  pushState: (label, data) =>
     set((s) => {
-      const entry: HistoryEntry = { label, svgSnapshot: svg, timestamp: Date.now() }
+      const entry: HistoryEntry = { label, canvasSnapshot: data, timestamp: Date.now() }
       const stack = [...s.undoStack, entry]
       if (stack.length > s.maxSteps) stack.shift()
       return { undoStack: stack, redoStack: [] }

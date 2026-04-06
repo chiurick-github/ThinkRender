@@ -15,7 +15,7 @@ export default function TitleBar() {
         {fileName}
         {isModified && <span className="modified"> ●</span>}
         <span style={{ color: 'var(--text-muted)', marginLeft: 8, fontSize: 'var(--text-xs)' }}>
-          — SVG Editor
+          — ThinkRender
         </span>
       </div>
       <div className="titlebar-controls">

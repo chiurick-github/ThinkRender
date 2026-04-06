@@ -1,11 +1,8 @@
 import {
   MousePointer2,
-  Square,
-  Circle,
+  Shapes,
   Minus,
   MoveRight,
-  Triangle,
-  Star,
   Type,
   Pencil
 } from 'lucide-react'
@@ -20,10 +17,7 @@ interface ToolDef {
 
 const tools: ToolDef[] = [
   { id: 'select', icon: <MousePointer2 size={18} />, label: 'Select (V)', group: 0 },
-  { id: 'rect', icon: <Square size={18} />, label: 'Rectangle (R)', group: 1 },
-  { id: 'circle', icon: <Circle size={18} />, label: 'Circle (C)', group: 1 },
-  { id: 'triangle', icon: <Triangle size={18} />, label: 'Triangle', group: 1 },
-  { id: 'star', icon: <Star size={18} />, label: 'Star', group: 1 },
+  { id: 'rect' as any, icon: <Shapes size={18} />, label: 'Shapes / Assets', group: 1 }, // We'll use this to toggle panel
   { id: 'line', icon: <Minus size={18} />, label: 'Line (L)', group: 2 },
   { id: 'arrow', icon: <MoveRight size={18} />, label: 'Arrow', group: 2 },
   { id: 'text', icon: <Type size={18} />, label: 'Text (T)', group: 3 },
@@ -31,21 +25,33 @@ const tools: ToolDef[] = [
 ]
 
 export default function Toolbar() {
-  const { activeTool, setActiveTool } = useEditorStore()
+  const { activeTool, setActiveTool, showAssetPanel, toggleAssetPanel } = useEditorStore()
 
-  let lastGroup = -1
+  const handleToolClick = (toolId: Tool) => {
+    if ((toolId as string) === 'rect') { // This is our Asset Panel toggle
+      toggleAssetPanel()
+    } else {
+      setActiveTool(toolId)
+    }
+  }
 
   return (
     <div className="toolbar">
-      {tools.map((tool) => {
-        const showSep = lastGroup !== -1 && tool.group !== lastGroup
-        lastGroup = tool.group
+      {tools.map((tool, index) => {
+        const prevTool = index > 0 ? tools[index - 1] : null
+        const showSep = prevTool !== null && tool.group !== prevTool.group
+        
+        let isActive = activeTool === tool.id
+        if ((tool.id as string) === 'rect' && showAssetPanel) {
+          isActive = true
+        }
+
         return (
           <div key={tool.id}>
             {showSep && <div className="toolbar-separator" />}
             <button
-              className={`tool-btn ${activeTool === tool.id ? 'active' : ''}`}
-              onClick={() => setActiveTool(tool.id)}
+              className={`tool-btn ${isActive ? 'active' : ''}`}
+              onClick={() => handleToolClick(tool.id)}
               aria-label={tool.label}
             >
               {tool.icon}

@@ -1,7 +1,7 @@
 {
-  "name": "svg-editor",
+  "name": "think-render",
   "version": "1.0.0",
-  "description": "Cross-platform SVG Editor built with Electron",
+  "description": "Cross-platform vector graphics editor with intelligent features",
   "main": "./out/main/index.js",
   "scripts": {
     "dev": "electron-vite dev",
@@ -42,7 +42,7 @@
     "electron": "^35.1.5",
     "electron-builder": "^25.1.8",
     "electron-vite": "^5.0.0",
-    "eslint": "^9.39.4",
+    "eslint": "^8.57.1",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "husky": "^9.1.7",
@@ -53,8 +53,8 @@
     "vitest": "^4.1.2"
   },
   "build": {
-    "appId": "com.svgeditor.app",
-    "productName": "SVG Editor",
+    "appId": "com.thinkrender.app",
+    "productName": "ThinkRender",
     "mac": {
       "target": "dmg"
     }

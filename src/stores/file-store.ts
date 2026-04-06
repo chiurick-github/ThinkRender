@@ -3,7 +3,7 @@ import { create } from 'zustand'
 export interface Page {
   id: string
   name: string
-  svgContent: string
+  canvasData: string
 }
 
 export interface FileState {
@@ -21,7 +21,7 @@ export interface FileState {
   removePage: (id: string) => void
   setActivePageId: (id: string) => void
   renamePage: (id: string, name: string) => void
-  updatePageSvg: (id: string, svg: string) => void
+  updatePageData: (id: string, data: string) => void
   resetFile: () => void
 }
 
@@ -32,7 +32,7 @@ function createPage(name?: string): Page {
   return {
     id,
     name: name || `Page ${pageCounter - 1}`,
-    svgContent: ''
+    canvasData: ''
   }
 }
 
@@ -75,9 +75,9 @@ export const useFileStore = create<FileState>((set, get) => ({
       isModified: true
     })),
 
-  updatePageSvg: (id, svg) =>
+  updatePageData: (id, data) =>
     set((s) => ({
-      pages: s.pages.map((p) => (p.id === id ? { ...p, svgContent: svg } : p)),
+      pages: s.pages.map((p) => (p.id === id ? { ...p, canvasData: data } : p)),
       isModified: true
     })),
 

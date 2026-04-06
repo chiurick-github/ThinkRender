@@ -10,9 +10,9 @@ describe('TitleBar', () => {
     expect(screen.getByText(/TestFile\.svg/)).toBeInTheDocument()
   })
 
-  it('should show SVG Editor text', () => {
+  it('should show ThinkRender text', () => {
     render(<TitleBar />)
-    expect(screen.getByText(/SVG Editor/)).toBeInTheDocument()
+    expect(screen.getByText(/ThinkRender/)).toBeInTheDocument()
   })
 
   it('should show modified indicator when file is modified', () => {
