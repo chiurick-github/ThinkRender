@@ -35,8 +35,10 @@ test.describe('Exception & Edge Case Handling', () => {
   })
 
   test('should survive clicking without dragging (zero size shape)', async () => {
-    // Select rectangle tool
-    await page.locator('button[aria-label="Rectangle (R)"]').click()
+    // Select rectangle tool from asset panel
+    await page.locator('button[aria-label="Shapes / Assets"]').click()
+    await page.waitForTimeout(500)
+    await page.locator('.asset-item', { hasText: 'Rectangle' }).click()
     
     // Just click on canvas without moving to create 0x0 shape
     const canvas = page.locator('.canvas-container').first()
@@ -49,7 +51,6 @@ test.describe('Exception & Edge Case Handling', () => {
     // because a 0x0 shape shouldn't normally be selectable or might be filtered out
     const panel = page.locator('.panel')
     await expect(panel).toBeVisible()
-    
     // Put tool back to select
     await page.locator('button[aria-label="Select (V)"]').click()
   })

@@ -19,15 +19,25 @@ test.afterAll(async () => {
 })
 
 test.describe('Drawing Operations', () => {
-  test('should select rectangle tool from toolbar', async () => {
-    const rectBtn = page.locator('button[aria-label="Rectangle (R)"]')
-    await rectBtn.click()
-    await expect(rectBtn).toHaveClass(/active/)
+  test('should select rectangle tool from asset panel', async () => {
+    const assetBtn = page.locator('button[aria-label="Shapes / Assets"]')
+    await assetBtn.click()
+    
+    const rectItem = page.locator('.asset-item', { hasText: 'Rectangle' })
+    await rectItem.click()
+    
+    await expect(assetBtn).toHaveClass(/active/)
   })
 
   test('should draw a rectangle on canvas', async () => {
-    // Select rect tool
-    await page.locator('button[aria-label="Rectangle (R)"]').click()
+    // Open asset panel and select rect
+    const assetBtn = page.locator('button[aria-label="Shapes / Assets"]')
+    await assetBtn.click()
+    // Wait for panel animation
+    await page.waitForTimeout(500)
+    
+    const rectItem = page.locator('.asset-item', { hasText: 'Rectangle' })
+    await rectItem.click()
 
     // Draw on canvas
     const canvas = page.locator('.canvas-container canvas').first()

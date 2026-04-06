@@ -26,9 +26,9 @@ test.describe('App Launch', () => {
     expect(windows.length).toBeGreaterThan(0)
   })
 
-  test('should display the title bar with SVG Editor', async () => {
+  test('should display the title bar with ThinkRender', async () => {
     const titleText = await page.textContent('.titlebar-title')
-    expect(titleText).toContain('SVG Editor')
+    expect(titleText).toContain('ThinkRender')
   })
 
   test('should display the toolbar', async () => {

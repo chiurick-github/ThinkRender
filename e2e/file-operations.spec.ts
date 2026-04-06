@@ -32,8 +32,10 @@ test.describe('File Operations', () => {
     expect(statusbar).toContain('No selection')
   })
 
-  test('title should contain SVG Editor', async () => {
-    const title = await page.textContent('.titlebar-title')
-    expect(title).toContain('SVG Editor')
+  test('title should contain ThinkRender', async () => {
+    const title = await app.evaluate(async ({ BrowserWindow }) => {
+      return BrowserWindow.getAllWindows()[0].getTitle()
+    })
+    expect(title).toContain('ThinkRender')
   })
 })

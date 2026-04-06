@@ -19,10 +19,11 @@ test.afterAll(async () => {
 
 test.describe('Editable Properties & Layers', () => {
   test('should draw an object and edit its properties without crashing', async () => {
-    // Select Rect tool
-    // Select Rect tool via keyboard shortcut
-    const rectBtn = page.locator('button[aria-label="Rectangle (R)"]')
-    await rectBtn.click()
+    // Select Rect tool via asset panel
+    const assetBtn = page.locator('button[aria-label="Shapes / Assets"]')
+    await assetBtn.click()
+    await page.waitForTimeout(500)
+    await page.locator('.asset-item', { hasText: 'Rectangle' }).click()
     
     // Draw it matching drawing.spec.ts
     const canvas = page.locator('.canvas-container canvas').first()

@@ -26,6 +26,7 @@ export default function AssetPanel() {
     // Basic shapes can switch tools for drawing
     if (asset.category === 'basic') {
       setActiveTool(asset.id.replace('basic-', '') as any)
+      toggleAssetPanel() // Close panel after selection
       return
     }
 
@@ -33,6 +34,7 @@ export default function AssetPanel() {
     window.dispatchEvent(new CustomEvent('canvas:insert-asset', {
       detail: asset
     }))
+    toggleAssetPanel() // Close panel after insertion
   }
 
   const getCategoryIcon = (id: string) => {
